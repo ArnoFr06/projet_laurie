@@ -388,7 +388,7 @@ body {
   background:
     linear-gradient(120deg, rgba(255, 248, 246, 0.28) 60%, rgba(247, 198, 217, 0.85) 100%),
     linear-gradient(300deg, rgba(255, 248, 246, 0.28) 60%, rgba(247, 198, 217, 0.85) 100%),
-    url('public/images/fond.jpeg') center/cover no-repeat fixed;
+    url('../public/images/fond.jpeg') center/cover no-repeat fixed;
   color: #333;
   min-height: 100vh;
   position: relative;
@@ -402,7 +402,7 @@ body::before {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: url('public/images/fond.jpeg') center/cover no-repeat fixed;
+  background: url('../public/images/fond.jpeg') center/cover no-repeat fixed;
   filter: blur(8px) brightness(1.08);
   opacity: 0.08;
 }
