@@ -102,13 +102,37 @@
 }
 
 @media (max-width: 600px) {
-  h1, .subtitle, .header-content, h2, .card > p, .card > ul, .card > ol, .card > div, .card > .highlights {
+  h1, .subtitle, .header-content, h2, .card > p, .card > ul, .card > ol, .card > div {
     text-align: center;
+  }
+  /* Points roses à propos de Laurie */
+  .highlights {
+    text-align: center;
+    padding-left: 1.2rem;
+    list-style-type: none;
+  }
+  /* Mes valeurs : réduit l'espace sous chaque sous-section */
+  .valeurs-flex {
+    gap: 0.5rem;
+  }
+  .valeur {
+    margin-bottom: 0;
+    text-align: center;
+  }
+  /* Processus & engagement qualité : points roses alignés à gauche */
+  .processus-list {
+    text-align: left;
+    padding-left: 1.2rem;
+  }
+  /* Formation & matériel : points alignés à gauche */
+  .formation-flex .highlights {
+    text-align: left;
+    padding-left: 1.2rem;
   }
   .header-content {
     text-align: center;
   }
-  .cta {
+  .header-content .cta {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -505,8 +529,8 @@ main {
 }
 
 .card {
-  margin-bottom: 2.5rem;
-  background: #fff;
+  margin-bottom: 2rem;
+  background: rgba(255, 250, 254, 0.79);
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(184, 0, 92, 0.07);
   padding: 2rem 1.5rem;
@@ -521,6 +545,9 @@ main {
 }
 
 @media (min-width: 601px) {
+  .highlights {
+    list-style-type: disc;
+  }
   .formation-flex {
     align-items: center;
   }
@@ -552,8 +579,8 @@ main {
 }
 
 .valeur {
-  flex: 1 1 200px;
-  background: #fff8f6;
+  flex: 1 1;
+  background: #f9deec;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(184, 0, 92, 0.05);
   padding: 1rem;
@@ -744,5 +771,15 @@ blockquote span {
 
   .portrait {
     margin: 0 0 1rem 0;
+  }
+
+  .footer-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-flex a {
+    margin: 0.5rem 0;
+    display: inline-block;
   }
 }
