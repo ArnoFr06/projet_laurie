@@ -426,7 +426,7 @@ body::before {
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: url('../public/images/fond.jpeg') center/cover no-repeat fixed;
+  background: url('../public/images/fond.jpeg') center/cover no-repeat;
   filter: blur(8px) brightness(1.08);
   opacity: 0.08;
 }
