@@ -234,7 +234,10 @@
             <label for="message">Message :</label>
             <textarea id="message" name="message" required rows="5"
               placeholder="Décrivez votre demande, vos attentes, la zone à traiter…" autocapitalize="sentences"
-              autocorrect="on" spellcheck="true" enterkeyhint="send" maxlength="1000"></textarea>
+              autocorrect="on" spellcheck="true" enterkeyhint="send" maxlength="1000"
+              aria-label="Votre message"
+              aria-describedby="message-help"></textarea>
+            <span id="message-help" class="sr-only">1000 caractères maximum. Décrivez votre demande, vos attentes et la zone à traiter.</span>
             <!-- Honeypot anti-spam -->
             <div style="display:none;">
               <label for="website">Ne pas remplir ce champ :</label>

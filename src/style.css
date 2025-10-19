@@ -238,7 +238,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.5em;
-  text-align: left
+  text-align: left;
 }
 
 .form-success i {
@@ -931,6 +931,19 @@ blockquote span {
 .tarif-cta {
   text-align: center;
   margin-top: 1.2rem;
+}
+
+/* Accessibilité: contenu pour lecteurs d'écran uniquement */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .tarif-info {
