@@ -219,47 +219,44 @@
         </div>
         <div class="contact-formulaire">
           <h3><i class="fa-solid fa-paper-plane"></i> Formulaire de contact</h3>
-          <form id="contact-form"
-            action="https://script.google.com/macros/s/AKfycbzyUOZh4EVrN_ueqNRIFrM8WGf0d1WjInwo_x_DGjNn_Ya2kc-Dhlk76cXxxqVzlic-ZQ/exec"
-            method="POST" autocomplete="off">
-            <label for="firstname">Prénom :</label>
-            <input type="text" id="firstname" name="firstname" required placeholder="Prénom">
-            <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" required placeholder="Nom">
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required placeholder="email@email.fr">
-            <label for="phone">Numéro de téléphone :</label>
-            <input type="tel" id="phone" name="phone" required pattern="[0-9\s\-\+]{10,15}"
-              placeholder="Numéro de téléphone">
-            <label for="message">Message :</label>
-            <textarea id="message" name="message" required rows="5"
-              placeholder="Décrivez votre demande, vos attentes, la zone à traiter…" autocapitalize="sentences"
-              autocorrect="on" spellcheck="true" enterkeyhint="send" maxlength="1000"
-              aria-label="Votre message"
-              aria-describedby="message-help"></textarea>
-            <span id="message-help" class="sr-only">1000 caractères maximum. Décrivez votre demande, vos attentes et la zone à traiter.</span>
-            <!-- Honeypot anti-spam -->
-            <div style="display:none;">
-              <label for="website">Ne pas remplir ce champ :</label>
-              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-            </div>
-            <!-- Google reCAPTCHA widget -->
-            <div style="margin: 0.8rem auto 0;">
-              <div class="g-recaptcha" data-sitekey="6LeyTMErAAAAAOYJQULZb2Sdn8asJGQchU0O4-Ej"></div>
-            </div>
-            <button type="submit"><i class="fa-solid fa-paper-plane"></i> Envoyer</button>
-            <div id="form-loader" style="display:none;margin-top:1rem;text-align:center;">
-              <span class="loader"></span>
-            </div>
-            <div class="form-privacy">
-              <i class="fa-solid fa-circle-info" style="color:#b8005c;margin-right:0.5em;"></i>
-              Les informations recueillies via ce formulaire sont utilisées uniquement pour traiter votre demande de
-              contact. Elles ne sont pas transmises à des tiers et sont supprimées après traitement. Conformément à la
-              loi, vous pouvez demander l’accès, la rectification ou la suppression de vos données à tout moment.
-            </div>
-
-          </form>
-
+            <form id="contact-form" action="https://script.google.com/macros/s/AKfycbzyUOZh4EVrN_ueqNRIFrM8WGf0d1WjInwo_x_DGjNn_Ya2kc-Dhlk76cXxxqVzlic-ZQ/exec" method="POST" autocomplete="off">
+  <label for="firstname">Prénom :</label>
+  <input type="text" id="firstname" name="firstname" required placeholder="Prénom">
+  <label for="name">Nom :</label>
+  <input type="text" id="name" name="name" required placeholder="Nom">
+  <label for="email">Email :</label>
+  <input type="email" id="email" name="email" required placeholder="email@email.fr">
+  <label for="phone">Numéro de téléphone :</label>
+  <input type="tel" id="phone" name="phone" required pattern="[0-9\s\-\+]{10,15}" placeholder="Numéro de téléphone">
+  <label for="message">Message :</label>
+  <textarea id="message" name="message" required></textarea>
+  <!-- Honeypot anti-spam -->
+  <div style="display:none;">
+    <label for="website">Ne pas remplir ce champ :</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+  </div>
+    <!-- Google reCAPTCHA widget -->
+    <div style="margin:1rem 0;">
+      <div class="g-recaptcha" data-sitekey="6LeyTMErAAAAAOYJQULZb2Sdn8asJGQchU0O4-Ej"></div>
+    </div>
+  <button type="submit" required><i class="fa-solid fa-paper-plane"></i> Envoyer</button>
+  <div id="form-loader" style="display:none;margin-top:1rem;text-align:center;">
+    <span class="loader"></span>
+  </div>
+  <div id="form-feedback" style="margin-top:1rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem;"></div>
+  <div class="form-privacy">
+    <i class="fa-solid fa-circle-info" style="color:#b8005c;margin-right:0.5em;"></i>
+    Les informations recueillies via ce formulaire sont utilisées uniquement pour traiter votre demande de contact. Elles ne sont pas transmises à des tiers et sont supprimées après traitement. Conformément à la loi, vous pouvez demander l’accès, la rectification ou la suppression de vos données à tout moment.
+  </div>
+  <div id="form-loader" style="display:none;margin-top:1rem;text-align:center;">
+    <span class="loader"></span>
+  </div>
+  <div id="form-feedback" style="margin-top:1rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem;"></div>
+</form>
+          <div id="form-loader" style="display:none;margin-top:1rem;text-align:center;">
+            <span class="loader"></span>
+          </div>
+          <div id="form-feedback" style="margin-top:1rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem;"></div>
         </div>
       </div>
     </section>
