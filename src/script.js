@@ -20,4 +20,18 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
+
+  // Auto-resize textarea for better mobile typing experience
+  var message = document.getElementById('message');
+  if (message) {
+    var maxHeight = 400; // px
+    var resize = function() {
+      message.style.height = 'auto';
+      var newH = Math.min(message.scrollHeight + 2, maxHeight);
+      message.style.height = newH + 'px';
+    };
+    // Initial fit and on input
+    resize();
+    message.addEventListener('input', resize);
+  }
 });
