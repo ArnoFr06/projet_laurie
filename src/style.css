@@ -5,6 +5,7 @@
   right: 18px;
   z-index: 2000;
 }
+
 .menu-icon {
   display: flex;
   flex-direction: column;
@@ -13,10 +14,11 @@
   width: 40px;
   height: 40px;
   cursor: pointer;
-  background: rgba(255,248,246,0.95);
+  background: rgba(255, 248, 246, 0.95);
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(184,0,92,0.13);
+  box-shadow: 0 4px 16px rgba(184, 0, 92, 0.13);
 }
+
 .menu-icon span {
   display: block;
   width: 26px;
@@ -25,15 +27,18 @@
   margin-bottom: 6px;
   background: linear-gradient(90deg, #b8005c 60%, #d9006c 100%);
   border-radius: 2px;
-  transition: transform 0.3s cubic-bezier(.77,0,.175,1), opacity 0.3s, background 0.3s;
+  transition: transform 0.3s cubic-bezier(.77, 0, .175, 1), opacity 0.3s, background 0.3s;
 }
-#menu-toggle:checked + .menu-icon span:nth-child(1) {
+
+#menu-toggle:checked+.menu-icon span:nth-child(1) {
   transform: translateY(10px) rotate(45deg);
 }
-#menu-toggle:checked + .menu-icon span:nth-child(2) {
+
+#menu-toggle:checked+.menu-icon span:nth-child(2) {
   opacity: 0;
 }
-#menu-toggle:checked + .menu-icon span:nth-child(3) {
+
+#menu-toggle:checked+.menu-icon span:nth-child(3) {
   transform: translateY(-10px) rotate(-45deg);
 }
 
@@ -41,25 +46,29 @@
   display: none;
 
 }
+
 .menu-list {
   position: absolute;
   top: 48px;
   right: 0;
-  background: rgba(255,248,246,0.98);
+  background: rgba(255, 248, 246, 0.98);
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(184,0,92,0.13);
+  box-shadow: 0 4px 16px rgba(184, 0, 92, 0.13);
   padding: 1rem 1.2rem;
   min-width: 180px;
   display: none;
   flex-direction: column;
   gap: 0.7rem;
 }
-#menu-toggle:checked + .menu-icon + .menu-list {
+
+#menu-toggle:checked+.menu-icon+.menu-list {
   display: flex;
 }
+
 .menu-list li {
   list-style: none;
 }
+
 .menu-list a {
   color: #b8005c;
   font-weight: bold;
@@ -69,25 +78,30 @@
   border-radius: 8px;
   transition: background 0.2s, color 0.2s;
 }
+
 .menu-list a:hover {
   background: #f7c6d9;
   color: #d9006c;
 }
+
 @media (max-width: 900px) {
   .burger-menu {
     top: 8px;
     right: 8px;
   }
+
   .menu-list {
     min-width: 140px;
     padding: 0.7rem 0.5rem;
     gap: 0.5rem;
   }
+
   .menu-list a {
     font-size: 0.98rem;
     padding: 0.2em 0.5em;
   }
 }
+
 .amiea-presentation {
   height: 100%;
   width: auto;
@@ -102,36 +116,51 @@
 }
 
 @media (max-width: 600px) {
-  h1, .subtitle, .header-content, h2, .card > p, .card > ul, .card > ol, .card > div {
+
+  h1,
+  .subtitle,
+  .header-content,
+  h2,
+  .card>p,
+  .card>ul,
+  .card>ol,
+  .card>div {
     text-align: center;
   }
+
   /* Points roses à propos de Laurie */
   .highlights {
     text-align: center;
     padding-left: 1.2rem;
     list-style-type: none;
   }
+
   /* Mes valeurs : réduit l'espace sous chaque sous-section */
   .valeurs-flex {
     gap: 0.5rem;
   }
+
   .valeur {
     margin-bottom: 0;
     text-align: center;
   }
+
   /* Processus & engagement qualité : points roses alignés à gauche */
   .processus-list {
     text-align: left;
     padding-left: 1.2rem;
   }
+
   /* Formation & matériel : points alignés à gauche */
   .formation-flex .highlights {
     text-align: left;
     padding-left: 1.2rem;
   }
+
   .header-content {
     text-align: center;
   }
+
   .header-content .cta {
     display: block;
     margin-left: auto;
@@ -140,6 +169,7 @@
     margin-bottom: 1rem;
     width: fit-content;
   }
+
   .amiea-presentation {
     display: block;
     margin: 0 auto 1rem auto !important;
@@ -148,12 +178,14 @@
     min-width: 0;
     max-height: 220px;
   }
+
   .formation-flex {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-  .formation-flex > div {
+
+  .formation-flex>div {
     text-align: center;
   }
 
@@ -169,6 +201,7 @@
 
   h2 {
     font-size: 1.3rem;
+    margin-top: 0.2rem;
   }
 
   h1 {
@@ -194,7 +227,7 @@
 
 /* Message RGPD sous le formulaire */
 .form-privacy {
-  font-size: 0.97rem;
+  font-size: 0.9rem;
   color: #6c4a5c;
   background: #fff8f6;
   border-left: 4px solid #b8005c;
@@ -205,18 +238,21 @@
   display: flex;
   align-items: flex-start;
   gap: 0.5em;
+  text-align: left
 }
 
 .form-success i {
   color: #009966;
   font-size: 2rem;
   vertical-align: middle;
+  margin: 0.8rem auto 0;
 }
 
 .form-error i {
   color: #b8005c;
   font-size: 2rem;
   vertical-align: middle;
+  margin: 0.8rem auto 0;
 }
 
 /* Loader animation pour l'envoi du formulaire */
@@ -266,7 +302,7 @@
 }
 
 .contact-instagram .cta i.fa-instagram {
-  color: #fff;
+  color: #f7e0ec;
   transition: color 0.2s;
 }
 
@@ -276,7 +312,7 @@
 }
 
 .contact-instagram .cta span {
-  color: #fff;
+  color: #f7e0ec;
   transition: color 0.2s;
 }
 
@@ -295,8 +331,7 @@
 
 .contact-instagram,
 .contact-formulaire {
-  flex: 1 1 320px;
-  background: #fff8f6;
+  background: #f7e0ec;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(184, 0, 92, 0.05);
   padding: 1.5rem 1rem;
@@ -306,12 +341,14 @@
 .contact-instagram h3 {
   color: #b8005c;
   margin-bottom: 0.7rem;
+  margin-top: 0.2rem;
   font-size: 1.2rem;
 }
 
 .contact-formulaire h3 {
   color: #b8005c;
   margin-bottom: 0.7rem;
+  margin-top: 0.2rem;
   font-size: 1.2rem;
 }
 
@@ -548,6 +585,7 @@ main {
   .highlights {
     list-style-type: disc;
   }
+
   .formation-flex {
     align-items: center;
   }
@@ -580,7 +618,7 @@ main {
 
 .valeur {
   flex: 1 1;
-  background: #f9deec;
+  background: #f7e0ec;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(184, 0, 92, 0.05);
   padding: 1rem;
@@ -594,7 +632,8 @@ main {
 
 .valeur h3 {
   color: #b8005c;
-  margin: 0.5rem 0;
+  margin-bottom: 0.7rem;
+  margin-top: 0.2rem;
 }
 
 .formation-flex {
@@ -665,6 +704,12 @@ blockquote span {
   box-shadow: 0 2px 8px rgba(184, 0, 92, 0.07);
 }
 
+#contact-form textarea#message {
+  min-height: 140px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
 #contact-form button {
   background: #b8005c;
   color: #fff;
@@ -681,10 +726,10 @@ blockquote span {
   background: linear-gradient(90deg, #b8005c 60%, #d9006c 100%);
   color: #fff;
   border: none;
-  padding: 1rem;
+  padding: 0.8rem 1.7rem; /* align with .cta */
   border-radius: 32px;
   cursor: pointer;
-  font-size: 1.13rem;
+  font-size: 1.1rem; /* align with .cta */
   font-weight: bold;
   box-shadow: 0 4px 16px rgba(184, 0, 92, 0.12);
   transition: background 0.2s, box-shadow 0.2s;
@@ -693,6 +738,37 @@ blockquote span {
 #contact-form button:hover {
   background: linear-gradient(90deg, #d9006c 60%, #b8005c 100%);
   box-shadow: 0 8px 32px rgba(184, 0, 92, 0.18);
+}
+
+/* Center CTAs consistently */
+.header-content .cta {
+  display: block;
+  width: fit-content;
+  margin: 1rem auto;
+}
+
+/* Desktop: keep the first header CTA aligned left */
+@media (min-width: 901px) {
+  .header-content .cta {
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.contact-instagram { /* center only the button visually */
+  text-align: center;
+}
+.contact-instagram .cta {
+  display: inline-flex; /* keep icon/text alignment */
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+#contact-form button {
+  display: block;
+  width: fit-content;
+  margin: 0.8rem auto 0;
 }
 
 #instagram {
@@ -778,8 +854,106 @@ blockquote span {
     align-items: center;
     text-align: center;
   }
+
   .footer-flex a {
     margin: 0.5rem 0;
     display: inline-block;
   }
+}
+
+/* Tarifs */
+#tarifs h3 {
+  color: #b8005c;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.tarif-subtitle {
+  margin: 0 0 0.5rem 0;
+  color: #6c4a5c;
+  font-size: 0.95rem;
+}
+
+.tarif-note {
+  margin: 0.3rem 0;
+  color: #6c4a5c;
+  font-size: 0.95rem;
+}
+
+.tarifs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+@media (max-width: 800px) {
+  .tarifs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tarif-category {
+  background: #f7e0ec;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(184, 0, 92, 0.05);
+  padding: 1rem;
+}
+
+.tarif-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  text-align: left;
+}
+
+.tarif-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.45rem 0.2rem;
+  border-bottom: 1px dashed rgba(184, 0, 92, 0.25);
+}
+
+.tarif-item:last-child {
+  border-bottom: none;
+}
+
+.tarif-item .price {
+  color: #b8005c;
+  font-weight: bold;
+}
+
+.tarif-item small.muted {
+  color: #6c4a5c;
+  font-weight: normal;
+}
+
+.tarif-cta {
+  text-align: center;
+  margin-top: 1.2rem;
+}
+
+.tarif-info {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  background: #fff8f6;
+  border-left: 4px solid #b8005c;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(184, 0, 92, 0.05);
+}
+
+.tarif-info i {
+  color: #b8005c;
+  margin-top: 0.1rem;
+}
+
+.tarif-info p {
+  margin: 0;
+  color: #6c4a5c;
+  font-size: 0.9rem;
+  text-align: left;
 }
