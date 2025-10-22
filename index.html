@@ -20,8 +20,7 @@
   <link rel="icon" href="src/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="src/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-  <!-- Google reCAPTCHA v2 -->
-  <script src="https://www.google.com/recaptcha/api.js?hl=fr" async defer></script>
+  <!-- Google reCAPTCHA v2 will be loaded dynamically after cookie consent -->
 </head>
 
 <body>
@@ -59,9 +58,9 @@
       <h2 class="animate-slide-left"><i class="fa-solid fa-images"></i> Portfolio</h2>
       <p>Découvrez quelques exemples de mes réalisations en maquillage semi-permanent. Chaque résultat est unique et
         adapté à votre visage.</p>
-      <p>Retrouvez les photos sur mon Instagram : <a href="https://www.instagram.com/laurie_permanentmakeup/"
-          target="_blank" rel="noopener" style="color:#b8005c;font-weight:bold;"><i class="fa-brands fa-instagram"></i>
-          @laurie_permanentmakeup</a></p>
+    <p>Retrouvez les photos sur mon Instagram : <a href="https://www.instagram.com/laurie_permanentmakeup/"
+      target="_blank" rel="noopener" class="link-accent"><i class="fa-brands fa-instagram"></i>
+      @laurie_permanentmakeup</a></p>
     </section>
 
     <section id="presentation" class="card">
@@ -219,6 +218,13 @@
         </div>
         <div class="contact-formulaire">
           <h3><i class="fa-solid fa-paper-plane"></i> Formulaire de contact</h3>
+          <div class="form-consent-notice" aria-live="polite" role="status" style="display:none;">
+            <i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>
+            <span>Pour activer le formulaire et le reCAPTCHA, veuillez accepter les cookies.</span>
+            <button type="button" class="btn-accept-cookies cta" style="margin-left:auto;">
+              <i class="fa-solid fa-check"></i> Accepter
+            </button>
+          </div>
             <form id="contact-form" action="https://script.google.com/macros/s/AKfycbzyUOZh4EVrN_ueqNRIFrM8WGf0d1WjInwo_x_DGjNn_Ya2kc-Dhlk76cXxxqVzlic-ZQ/exec" method="POST" autocomplete="off">
   <label for="firstname">Prénom :</label>
   <input type="text" id="firstname" name="firstname" required placeholder="Prénom">
@@ -229,13 +235,13 @@
   <label for="phone">Numéro de téléphone :</label>
   <input type="tel" id="phone" name="phone" required pattern="[0-9\s\-\+]{10,15}" placeholder="Numéro de téléphone">
   <label for="message">Message :</label>
-  <textarea id="message" name="message" required></textarea>
+  <textarea id="message" name="message" required placeholder="Décrivez votre demande, vos attentes, la zone à traiter…"></textarea>
   <!-- Honeypot anti-spam -->
   <div style="display:none;">
     <label for="website">Ne pas remplir ce champ :</label>
     <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
   </div>
-    <!-- Google reCAPTCHA widget -->
+    <!-- Google reCAPTCHA widget (chargé après consentement) -->
     <div style="margin:1rem 0;">
       <div class="g-recaptcha" data-sitekey="6LeyTMErAAAAAOYJQULZb2Sdn8asJGQchU0O4-Ej"></div>
     </div>
@@ -245,18 +251,11 @@
   </div>
   <div id="form-feedback" style="margin-top:1rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem;"></div>
   <div class="form-privacy">
-    <i class="fa-solid fa-circle-info" style="color:#b8005c;margin-right:0.5em;"></i>
+    <i class="fa-solid fa-circle-info" style="margin-right:0.5em;"></i>
     Les informations recueillies via ce formulaire sont utilisées uniquement pour traiter votre demande de contact. Elles ne sont pas transmises à des tiers et sont supprimées après traitement. Conformément à la loi, vous pouvez demander l’accès, la rectification ou la suppression de vos données à tout moment.
   </div>
-  <div id="form-loader" style="display:none;margin-top:1rem;text-align:center;">
-    <span class="loader"></span>
-  </div>
-  <div id="form-feedback" style="margin-top:1rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem;"></div>
 </form>
-          <div id="form-loader" style="display:none;margin-top:1rem;text-align:center;">
-            <span class="loader"></span>
-          </div>
-          <div id="form-feedback" style="margin-top:1rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem;"></div>
+          
         </div>
       </div>
     </section>
@@ -278,6 +277,83 @@
   </footer>
   <script src="src/script.js"></script>
   <script>
+    // Cookie consent + Deferred reCAPTCHA loading
+    (function() {
+      var CONSENT_KEY = 'cookieConsent';
+      var CONSENT_ACCEPTED = 'accepted';
+      var CONSENT_REJECTED = 'rejected';
+
+      function getConsent() {
+        try { return localStorage.getItem(CONSENT_KEY); } catch(e) { return null; }
+      }
+      function setConsent(val) {
+        try { localStorage.setItem(CONSENT_KEY, val); } catch(e) {}
+      }
+      function hasAccepted() { return getConsent() === CONSENT_ACCEPTED; }
+
+      function loadRecaptchaIfNeeded() {
+        if (!hasAccepted()) return;
+        if (window.grecaptcha || document.getElementById('recaptcha-script')) return;
+        var s = document.createElement('script');
+        s.src = 'https://www.google.com/recaptcha/api.js?hl=fr';
+        s.async = true; s.defer = true; s.id = 'recaptcha-script';
+        document.head.appendChild(s);
+      }
+
+      function updateFormBlockedState() {
+        var formSection = document.querySelector('.contact-formulaire');
+        var form = document.getElementById('contact-form');
+        var notice = document.querySelector('.form-consent-notice');
+        if (!formSection || !form) return;
+        var accepted = hasAccepted();
+        if (!accepted) {
+          formSection.classList.add('blocked');
+          if (notice) notice.style.display = 'flex';
+          // Disable inputs but keep the accept button clickable
+          Array.prototype.forEach.call(form.elements, function(el) { el.disabled = true; });
+        } else {
+          formSection.classList.remove('blocked');
+          if (notice) notice.style.display = 'none';
+          Array.prototype.forEach.call(form.elements, function(el) { el.disabled = false; });
+        }
+      }
+
+      function showBannerIfNeeded() {
+        var banner = document.getElementById('cookie-banner');
+        if (!banner) return;
+        var c = getConsent();
+        banner.style.display = (c === CONSENT_ACCEPTED || c === CONSENT_REJECTED) ? 'none' : 'flex';
+      }
+
+      function acceptCookies() {
+        setConsent(CONSENT_ACCEPTED);
+        showBannerIfNeeded();
+        updateFormBlockedState();
+        loadRecaptchaIfNeeded();
+      }
+      function rejectCookies() {
+        setConsent(CONSENT_REJECTED);
+        showBannerIfNeeded();
+        updateFormBlockedState();
+      }
+
+      document.addEventListener('DOMContentLoaded', function(){
+        // Wire banner buttons
+        var acceptBtn = document.querySelector('#cookie-banner .btn-accept');
+        var rejectBtn = document.querySelector('#cookie-banner .btn-reject');
+        if (acceptBtn) acceptBtn.addEventListener('click', acceptCookies);
+        if (rejectBtn) rejectBtn.addEventListener('click', rejectCookies);
+        // Wire in-form accept button
+        var formAccept = document.querySelector('.form-consent-notice .btn-accept-cookies');
+        if (formAccept) formAccept.addEventListener('click', acceptCookies);
+
+        // Initial UI state
+        showBannerIfNeeded();
+        updateFormBlockedState();
+        loadRecaptchaIfNeeded();
+      });
+    })();
+
     // Animation d'envoi du formulaire avec feedback visuel
     document.addEventListener('DOMContentLoaded', function () {
       var form = document.getElementById('contact-form');
@@ -324,10 +400,17 @@
       if (form) {
         form.addEventListener('submit', function (e) {
           // Vérification Google reCAPTCHA
+          var consentAccepted = false;
+          try { consentAccepted = (localStorage.getItem('cookieConsent') === 'accepted'); } catch(e) {}
+          if (!consentAccepted || !window.grecaptcha) {
+            e.preventDefault();
+            feedback.innerHTML = '<span class="form-error"><i class="fa-solid fa-cookie-bite"></i></span><span class="text-error">Veuillez accepter les cookies pour activer le reCAPTCHA et envoyer le formulaire.</span>';
+            return;
+          }
           var recaptchaResponse = grecaptcha.getResponse();
           if (!recaptchaResponse) {
             e.preventDefault();
-            feedback.innerHTML = '<span class="form-error"><i class="fa-solid fa-circle-xmark"></i></span><span style="color:#b8005c;">Veuillez cocher "Je ne suis pas un robot" pour continuer.</span>';
+            feedback.innerHTML = '<span class="form-error"><i class="fa-solid fa-circle-xmark"></i></span><span class="text-error">Veuillez cocher "Je ne suis pas un robot" pour continuer.</span>';
             return;
           }
           e.preventDefault();
@@ -343,18 +426,18 @@
             if (sp) { sp.style.display = 'none'; }
             loader.style.display = 'none';
             if (xhr.status === 200 && xhr.responseText.toLowerCase().includes('success')) {
-              feedback.innerHTML = '<span class="form-success"><i class="fa-solid fa-circle-check"></i></span><span style="color:#009966;">Merci, votre message a bien été envoyé !</span>';
+              feedback.innerHTML = '<span class="form-success"><i class="fa-solid fa-circle-check"></i></span><span class="text-success">Merci, votre message a bien été envoyé !</span>';
               form.reset();
               grecaptcha.reset();
             } else {
-              feedback.innerHTML = '<span class="form-error"><i class="fa-solid fa-circle-xmark"></i></span><span style="color:#b8005c;">Erreur lors de l\'envoi. Veuillez réessayer.</span>';
+              feedback.innerHTML = '<span class="form-error"><i class="fa-solid fa-circle-xmark"></i></span><span class="text-error">Erreur lors de l\'envoi. Veuillez réessayer.</span>';
             }
           };
           xhr.onerror = function () {
             var sp = loader.querySelector('.loader');
             if (sp) { sp.style.display = 'none'; }
             loader.style.display = 'none';
-            feedback.innerHTML = '<span class="form-error"><i class="fa-solid fa-circle-xmark"></i></span><span style="color:#b8005c;">Erreur réseau.</span>';
+            feedback.innerHTML = '<span class="form-error"><i class="fa-solid fa-circle-xmark"></i></span><span class="text-error">Erreur réseau.</span>';
           };
           var sp = loader.querySelector('.loader');
           if (sp) { sp.style.display = 'inline-block'; }
@@ -363,6 +446,20 @@
       }
     });
   </script>
+  <!-- Cookie Banner (RGPD) -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Bannière cookies" style="display:none;">
+    <div class="cookie-text">
+      <i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>
+      <span>
+        Nous utilisons des cookies techniques pour activer Google reCAPTCHA et sécuriser le formulaire de contact.
+        Vous pouvez refuser : le formulaire restera désactivé.
+      </span>
+    </div>
+    <div class="cookie-actions">
+      <button type="button" class="btn-reject">Refuser</button>
+      <button type="button" class="btn-accept cta"><i class="fa-solid fa-check"></i> Accepter</button>
+    </div>
+  </div>
 </body>
 
 </html>
