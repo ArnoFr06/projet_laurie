@@ -243,16 +243,18 @@
 
 .form-success i {
   color: #009966;
-  font-size: 2rem;
+  font-size: 1.6rem;
   vertical-align: middle;
-  margin: 0.8rem auto 0;
+  margin: 0;
+  line-height: 1;
 }
 
 .form-error i {
-  color: #725d4c;
-  font-size: 2rem;
+  color: #cb0018;
+  font-size: 1.6rem;
   vertical-align: middle;
-  margin: 0.8rem auto 0;
+  margin: 0;
+  line-height: 1;
 }
 
 /* Loader animation pour l'envoi du formulaire */
@@ -1056,9 +1058,9 @@ blockquote { background: #E7DBCE; color: var(--color-primary); border-left-color
 .link-accent { color: var(--color-primary); font-weight: 600; }
 .link-accent:hover { color: var(--color-primary-2); }
 .text-success { color: #0f7a4e; }
-.text-error { color: var(--color-primary); }
+.text-error { color: #cb0018; }
 .form-success i { color: #0f7a4e; }
-.form-error i { color: var(--color-primary); }
+.form-error i { color: #cb0018; }
 
 /* Cookie banner (RGPD) */
 .cookie-banner {
@@ -1100,3 +1102,20 @@ blockquote { background: #E7DBCE; color: var(--color-primary); border-left-color
   margin-bottom: 0.8rem;
 }
 .form-consent-notice i { color: var(--color-primary); }
+
+/* Center reCAPTCHA */
+#contact-form .recaptcha-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+/* Centrer les messages de feedback du formulaire */
+#contact-form #form-feedback {
+  display: flex;              /* déjà défini côté JS, renforcement ici */
+  justify-content: center;    /* centre horizontalement l’icône + le texte */
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;         /* centre le texte multi-ligne */
+  margin-top: 0.8rem;
+  width: 100%;
+}

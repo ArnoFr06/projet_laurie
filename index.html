@@ -240,14 +240,14 @@
     <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
   </div>
     <!-- Google reCAPTCHA widget (chargé après consentement) -->
-    <div style="margin:1rem 0;">
+    <div class="recaptcha-wrap" style="margin:1rem 0;">
       <div class="g-recaptcha" data-sitekey="6LeyTMErAAAAAOYJQULZb2Sdn8asJGQchU0O4-Ej"></div>
     </div>
-  <button type="submit" required><i class="fa-solid fa-paper-plane"></i> Envoyer</button>
   <div id="form-loader" style="display:none;margin-top:1rem;text-align:center;">
     <span class="loader"></span>
   </div>
   <div id="form-feedback" style="margin-top:1rem;font-weight:bold;display:flex;align-items:center;gap:0.5rem;"></div>
+  <button type="submit" required><i class="fa-solid fa-paper-plane"></i> Envoyer</button>
   <div class="form-privacy">
     <i class="fa-solid fa-circle-info" style="margin-right:0.5em;"></i>
     Les informations recueillies via ce formulaire sont utilisées uniquement pour traiter votre demande de contact. Elles ne sont pas transmises à des tiers et sont supprimées après traitement. Conformément à la loi, vous pouvez demander l’accès, la rectification ou la suppression de vos données à tout moment.
@@ -357,10 +357,9 @@
       var form = document.getElementById('contact-form');
       if (!form) { return; }
 
-      // Ensure feedback and loader nodes exist and are placed right after the submit button
-      var submitBtn = form.querySelector('button[type="submit"]');
-      var privacy = form.querySelector('.form-privacy');
-      var insertBeforeNode = privacy || null;
+  // Ensure feedback and loader nodes exist and are placed before the submit button (between reCAPTCHA and button)
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var insertBeforeNode = submitBtn || null;
 
       var loader = form.querySelector('#form-loader');
       if (!loader) {
@@ -372,11 +371,9 @@
         var spinner = document.createElement('span');
         spinner.className = 'loader';
         loader.appendChild(spinner);
-        if (submitBtn && insertBeforeNode) {
+        if (insertBeforeNode && insertBeforeNode.parentNode) {
           insertBeforeNode.parentNode.insertBefore(loader, insertBeforeNode);
-        } else {
-          form.appendChild(loader);
-        }
+        } else { form.appendChild(loader); }
       }
 
       var feedback = form.querySelector('#form-feedback');
@@ -388,10 +385,13 @@
         feedback.style.display = 'flex';
         feedback.style.alignItems = 'center';
         feedback.style.gap = '0.5rem';
-        if (submitBtn && insertBeforeNode) {
+        if (insertBeforeNode && insertBeforeNode.parentNode) {
           insertBeforeNode.parentNode.insertBefore(feedback, insertBeforeNode);
-        } else {
-          form.appendChild(feedback);
+        } else { form.appendChild(feedback); }
+      } else {
+        // If exists but not at the right place, move it before the button
+        if (insertBeforeNode && feedback.nextSibling !== insertBeforeNode) {
+          insertBeforeNode.parentNode.insertBefore(feedback, insertBeforeNode);
         }
       }
 
